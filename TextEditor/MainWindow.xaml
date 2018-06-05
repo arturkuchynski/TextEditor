@@ -1,0 +1,69 @@
+﻿<Window x:Class="TextEditor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Editor" Height="400" Width="700" MinHeight="300" MinWidth="300" Background="LightSteelBlue">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <ToolBar x:Name="toolBar" Height="35"  Background="LightSteelBlue" BorderBrush="LightBlue">
+            <Button x:Name="openBtn" Content="Open" Height="30" VerticalAlignment="Top" Width="75" Click="openBtn_Click" FontWeight="Bold" FontFamily="Segoe UI Semibold"/>
+            <Separator />
+            <Button x:Name="saveBtn" Content="Save" Height="30" VerticalAlignment="Top" Width="75" Click="saveBtn_Click" FontWeight="Bold" FontFamily="Segoe UI Semibold"/>
+            <Separator />
+            <Button x:Name="printBtn"  Content="Print" Height="30" VerticalAlignment="Top" Width="75" Click="printBtn_Click" FontWeight="Bold" FontFamily="Segoe UI Semibold"/>
+            <Separator />
+            <ToggleButton x:Name="btnBold" Command="EditingCommands.ToggleBold" Width="30" FontFamily="Segoe UI Semibold">B</ToggleButton>
+            <Separator />
+            <ToggleButton x:Name="btnItalic" Command="EditingCommands.ToggleItalic" Width="30" FontFamily="Segoe UI Semibold">I</ToggleButton>
+            <Separator />
+            <ToggleButton x:Name="btnUnderline" Command="EditingCommands.ToggleUnderline"  Width="30">
+                <ToggleButton.Content>
+                    <TextBlock TextDecorations="Underline" FontFamily="Segoe UI Semibold">U</TextBlock>
+                </ToggleButton.Content>
+            </ToggleButton>
+            <Separator />
+            <ComboBox x:Name="fontFamilyBox" Width="100" Height="21
+                     " Background="LightSteelBlue" BorderBrush="LightBlue" Margin="0,4,0,5" IsEditable="False" SelectionChanged="fontFamilyBox_SelectionChanged">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" FontFamily="{Binding}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Separator />
+            <ComboBox x:Name="fontSizeBox" IsEditable="True" Height="21
+                      " Background="LightSteelBlue" BorderBrush="LightBlue" TextBoxBase.SelectionChanged="fontSizeBox_SelectionChanged" Margin="0,4,0,5" Width="45">
+
+            </ComboBox>
+            <Separator />
+            <ComboBox x:Name="colorBox" Height="21" Background="LightSteelBlue" BorderBrush="LightBlue" Margin="0,4,0,0" VerticalAlignment="Top" Width="150" SelectionChanged="colorBox_SelectionChanged">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle Fill="{Binding Name}" Width="16" Height="16" Margin="0,2,5,2" />
+                            <TextBlock Text="{Binding Name}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+        </ToolBar>
+
+        <RichTextBox x:Name="textBox" Grid.Row="2" Background="LightSteelBlue" FontFamily="Calibri" SelectionChanged="textBox_SelectionChanged" TextChanged="textBox_TextChanged">
+            <RichTextBox.Resources>
+
+                <Style TargetType="{x:Type Paragraph}">
+
+                    <Setter Property="Margin" Value="0"/>
+
+                </Style>
+
+            </RichTextBox.Resources>
+        </RichTextBox>
+    </Grid>
+</Window>
